@@ -106,7 +106,7 @@
             <tbody>
                 <tr>
                     <td>POST</td>
-                    <td>/cart/1</td>
+                    <td>/api/v1/cart/1</td>
                     <td>
                         <ul>
                             <li>quantity</li>
@@ -116,7 +116,7 @@
                 </tr>
                 <tr>
                     <td>DELETE</td>
-                    <td>/cart/1</td>
+                    <td>/api/v1/cart/1</td>
                     <td></td>
                     <td>Удалит товар из корзины</td>
                 </tr>
@@ -151,7 +151,7 @@
                 </tr>
                 <tr>
                     <td>PUT</td>
-                    <td>/products/1</td>
+                    <td>/api/v1/products/1</td>
                     <td>
                         <ul>
                             <li>name</li>
@@ -169,6 +169,35 @@
                     <td>/products/1</td>
                     <td></td>
                     <td>Удаление товара</td>
+                </tr>
+
+                <tr>
+                    <td>POST</td>
+                    <td>/api/v1/categories/</td>
+                    <td>
+                        <ul>
+                            <li>name - required</li>
+                            <li>parent_id</li>
+                        </ul>
+                    </td>
+                    <td>Добавление категории</td>
+                </tr>
+                <tr>
+                    <td>PUT</td>
+                    <td>/api/v1/categories/1</td>
+                    <td>
+                        <ul>
+                            <li>name - required</li>
+                            <li>parent_id</li>
+                        </ul>
+                    </td>
+                    <td>Обновление категории</td>
+                </tr>
+                <tr>
+                    <td>DELETE</td>
+                    <td>/api/v1/categories/1</td>
+                    <td></td>
+                    <td>Удаление категории</td>
                 </tr>
             </tbody>
         </table>
