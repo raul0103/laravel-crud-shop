@@ -34,7 +34,9 @@ class ProductApiController extends Controller
     public function store(Request $request)
     {
         $product_dto = new ProductDTO($request->all());
-        $product_dto->validate();
+        if ($validate = $product_dto->validate()) {
+            return $validate;
+        }
 
         // Обработка изображения, если оно было загружено
         if ($request->hasFile('image')) {
@@ -98,7 +100,9 @@ class ProductApiController extends Controller
     public function update(Request $request, Product $product)
     {
         $product_dto = new ProductDTO($request->all());
-        $product_dto->validate();
+        if ($validate = $product_dto->validate()) {
+            return $validate;
+        }
 
         // Обработка изображения, если оно было загружено
         if ($request->hasFile('image')) {

@@ -2,25 +2,20 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\DTO\LoginDTO;
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
   public function __invoke(Request $request)
   {
-    $validator = Validator::make($request->all(), [
-      'email' =>  ['required', 'email'],
-      'password' => ['required'],
-    ]);
-
-    if ($validator->fails()) {
-      return response()->json(['errors' => $validator->errors()], 400);
+    $login_dto = new LoginDTO($request->all());
+    if ($validate = $login_dto->validate()) {
+      return $validate;
     }
 
-    $credentials = $validator->validated();
+    $credentials = $login_dto->toArray();
 
     if (auth()->attempt($credentials)) {
       $user = auth()->user();

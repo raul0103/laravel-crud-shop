@@ -2,27 +2,22 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\DTO\RegisterDTO;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
   public function __invoke(Request $request)
   {
-    $validator = Validator::make($request->all(), [
-      'name' => 'required',
-      'email' => 'required|email|unique:users',
-      'password' => 'required|min:8',
-    ]);
-
-    if ($validator->fails()) {
-      return response()->json(['errors' => $validator->errors()], 400);
+    $register_dto = new RegisterDTO($request->all());
+    if ($validate =  $register_dto->validate()) {
+      return $validate;
     }
 
-    $user_data = $validator->validated();
+    $user_data = $register_dto->toArray();
 
     // Установка роли "admin" для первого пользователя
     if (!User::count()) {
